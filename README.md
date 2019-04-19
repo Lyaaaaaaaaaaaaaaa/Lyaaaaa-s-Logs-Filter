@@ -13,4 +13,6 @@ In addition, in gaming communities, it's important for servers staff to monitor 
 3. Connect the interface to the previous package. *Not yet either!*
 
 ## More information:
-WIP
+[Code of conduit](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CODE_OF_CONDUCT.md)
+
+[How to contribute](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CONTRIBUTING.md)
