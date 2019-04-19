@@ -9,8 +9,8 @@ In addition, in gaming communities, it's important for servers staff to monitor 
 
 ## Project roadmap:
 1. Creating the package to read a file, filter it, and return each 'correct' line. *On it!*
-2. Create an interface  *Not yet on it!*
-3. Connect the interface to the previous package *Not yet either!*
+2. Create an interface.  *Not yet on it!*
+3. Connect the interface to the previous package. *Not yet either!*
 
 ## More information:
 WIP
