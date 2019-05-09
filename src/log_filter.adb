@@ -66,7 +66,8 @@ package body Log_Filter is
          if p_input_line(I) /= ' ' then
             
             --It seems like Put(filter(x,y)) prevent the program to display anything... Strange.
-            filters(array_line_position, array_column_position) := p_input_line(I);
+            --To_lower returns a character sent in parameter in lower case.
+            filters(array_line_position, array_column_position) := To_Lower(p_input_line(I)); 
            
             array_line_position := array_line_position + 1;  
             
@@ -158,7 +159,7 @@ package body Log_Filter is
                  AND Element(line,I) /='"' AND Element(line,I) /='<' AND Element(line,I) /='{' then
                   
                   word_length := word_length + 1;
-                  word (word_length) := Element(line,I);
+                  word (word_length) := To_Lower(Element(line,I));
                   
                end if;
                   

@@ -2,7 +2,6 @@ with Text_IO; use Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Text_IO.Unbounded_IO;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
-with Ada.Integer_Text_IO;
 
 package Log_Filter is
 
