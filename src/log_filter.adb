@@ -164,7 +164,7 @@ package body Log_Filter is
                   
             elsif Element(line,I) = ' ' or End_Of_Line(file) = true then
                
-               filter_check(p_filters, p_number_of_filters, word, word_length, filter_state);
+               filter_check(p_filters, p_number_of_filters, word, filter_state);
                word_length := 0;
                  
             end if;
@@ -183,7 +183,7 @@ package body Log_Filter is
    end read_line;  
    
    
-   procedure filter_check(p_filters : store_Filter; p_number_of_filters : Natural; p_word : String; p_word_length : Natural; p_filter_state : in out store_Filter_State) is
+   procedure filter_check(p_filters : store_Filter; p_number_of_filters : Natural; p_word : String; p_filter_state : in out store_Filter_State) is
 
       are_characters_identical : Boolean := true;
       
@@ -193,7 +193,7 @@ package body Log_Filter is
          
          are_characters_identical := true;
 
-         for Y in 1 .. p_word_length loop
+         for Y in 1 .. 40 loop
 
             if are_characters_identical = true then
                
@@ -201,7 +201,7 @@ package body Log_Filter is
                   
                   are_characters_identical := false;
                   
-               elsif Y = p_word_length AND are_characters_identical = true then
+               elsif p_filters(Y,I) = '|' AND are_characters_identical = true then
                   
                   p_filter_state(I) := true;
                   
