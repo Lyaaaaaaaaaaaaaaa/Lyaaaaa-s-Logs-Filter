@@ -60,19 +60,25 @@ package body Log_Filter is
       array_line_position : array_line_control := 1; 
       
    begin 
+      Put_Line("CREATE FILTER");
       for I in 1 .. p_input_last loop
          
          if p_input_line(I) /= ' ' then
             
-            --It seems like if I put filters(x,Y) = z before this line it doesn't write...
-            -- Moreover, it seems to glitch set_filters too!
-            
-            array_line_position := array_line_position + 1;  
+            --It seems like Put(filter(x,y)) prevent the program to display anything... Strange.
             filters(array_line_position, array_column_position) := p_input_line(I);
-         
+           
+            array_line_position := array_line_position + 1;  
+            
+            if I = p_input_last then
+               
+               filters(array_line_position, array_column_position) := '|';
+               
+            end if;
+            
          elsif p_input_line(I) = ' ' AND I /= 1 then
            
-            filters(array_line_position, array_column_position) := '/';
+            filters(array_line_position, array_column_position) := '|';
             array_line_position := 1;
             
             if array_column_position < p_number_of_filters then
@@ -82,8 +88,7 @@ package body Log_Filter is
             end if;
             
          end if;
-         
-         
+                  
       end loop;
       
       read_line(filters, p_number_of_filters);
@@ -130,11 +135,10 @@ package body Log_Filter is
 
    procedure read_line (p_filters : store_Filter; p_number_of_filters : Natural) is
       word : string (1..40); 
-      word_length : Natural := 1;
+      word_length : Natural := 0;
       line_to_display : Boolean := false;
       filter_state : store_Filter_State (1.. p_number_of_filters);
    begin
-      
       While not  End_Of_File (file) Loop
          
          line := To_Unbounded_String(Get_Line(file));
@@ -148,19 +152,23 @@ package body Log_Filter is
             -- then compare it with the filters
             -- then repeat until the end of line
             
-            
             if Element(line,I) /= ' ' and End_Of_Line(file) = false then
-            
-               word (word_length) := Element(line,I);
-               word_length := word_length + 1;
-
-            elsif Element(line,I) = ' ' or End_Of_Line(file) = true then
-               word_length := 1;
                
-               filter_check(p_filters, p_number_of_filters, word, filter_state); 
+               if Element(line,I) /= '[' AND Element(line,I) /= '(' AND Element(line,I) /=''' 
+                 AND Element(line,I) /='"' AND Element(line,I) /='<' AND Element(line,I) /='{' then
+                  
+                  word_length := word_length + 1;
+                  word (word_length) := Element(line,I);
+                  
+               end if;
+                  
+            elsif Element(line,I) = ' ' or End_Of_Line(file) = true then
+               
+               filter_check(p_filters, p_number_of_filters, word, word_length, filter_state);
+               word_length := 0;
                  
             end if;
-         
+
            
          end loop;
          
@@ -175,7 +183,7 @@ package body Log_Filter is
    end read_line;  
    
    
-   procedure filter_check(p_filters : store_Filter; p_number_of_filters : Natural; p_word : String; p_filter_state : in out store_Filter_State) is
+   procedure filter_check(p_filters : store_Filter; p_number_of_filters : Natural; p_word : String; p_word_length : Natural; p_filter_state : in out store_Filter_State) is
 
       are_characters_identical : Boolean := true;
       
@@ -184,16 +192,16 @@ package body Log_Filter is
       for I in 1 .. p_number_of_filters loop
          
          are_characters_identical := true;
-         
-         for Y in 1 .. 40 loop
+
+         for Y in 1 .. p_word_length loop
 
             if are_characters_identical = true then
                
-               if p_filters(Y,I) /= p_word(Y) AND p_filters(Y,I) /= '/' then
+               if p_filters(Y,I) /= p_word(Y) AND p_filters(Y,I) /= '|' then
                   
                   are_characters_identical := false;
-               
-               elsif p_filters(Y,I) = '/' AND are_characters_identical = true then
+                  
+               elsif Y = p_word_length AND are_characters_identical = true then
                   
                   p_filter_state(I) := true;
                   
@@ -206,6 +214,6 @@ package body Log_Filter is
       end loop;
       
    end filter_check;
-      
-
+   
+   
 end Log_Filter;
