@@ -5,29 +5,45 @@ with Ada.Characters.Handling; use Ada.Characters.Handling;
 
 package Log_Filter is
 
-   -- ===== Variables declaration =====
+   -- ===== Variables declaration ====================
    
    file : File_Type;
    line : Unbounded_String;
    
-   type store_Filter is
+   type Store_Filter is
      array (Natural range <>, Natural range <>) of Character;
    
-   type store_Filter_State is
+   --  I created this custom type to store in memory if our filters appear in the.
+   type Store_Filters_State is
      array (Natural range <>) of Boolean;
-
    
    
    -- ===== functions and procedures declaration =====
- 
-   procedure select_file(p_file : String);
+   -- I'm using P_variable for parameters name.
+   
+   procedure create_filters (P_Number_Of_Filters    : Natural;
+                             P_User_Filters_Input   : String;
+                             P_Last_Inputs_Position : Natural);
+   
    procedure display_line;
-   procedure read_line (p_filters : store_Filter; p_number_of_filters : Natural);
+   
+   procedure filter_check (P_Filters           :        store_Filter;
+                           P_Number_Of_Filters :        Natural;
+                           P_Word              :        String;
+                           P_Filters_State     : in out store_Filters_State);
+   
+   procedure initialize_Filters_State (P_Value         :        Boolean;
+                                       P_Filters_State : in out store_Filters_State);
+   
+   procedure read_line (P_Filters           :  store_Filter;
+                        P_Number_Of_Filters :  Natural);
+   
+   procedure select_file (P_File : String);
+   
    procedure set_filters;
-   procedure create_filters (p_number_of_filters : Natural; p_input_line : String; p_input_last : Natural);
-   procedure initialize_filter_state (p_value : Boolean; p_filter_state : in out store_Filter_State);
-   procedure filter_check (p_filters : store_Filter; p_number_of_filters : Natural; p_word : String; p_filter_state : in out store_Filter_State);   
 
-   function are_they_all_true (p_filter_state : store_Filter_State) return Boolean; 
-
+   function are_they_all_true (P_Filters_State : store_Filters_State)
+     return Boolean; 
+   
+   
 end Log_Filter;
