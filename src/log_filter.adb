@@ -2,9 +2,9 @@ package body Log_Filter is
 
 ----------------------------------------------------------   
    
-   procedure Create_Filters (p_number_of_filters  : Natural;
-                             P_User_Filters_Input : String;
-                             P_Last_Inputs_Position         : Natural) is
+   procedure Create_Filters (p_number_of_filters    : Natural;
+                             P_User_Filters_Input   : String;
+                             P_Last_Inputs_Position : Natural) is
       
       subtype array_column_control is
         Natural range 1 .. p_number_of_filters; 
@@ -104,7 +104,7 @@ package body Log_Filter is
  
 ----------------------------------------------------------         
 
-   procedure Initialize_Filters_State (p_value        :         Boolean;
+   procedure Initialize_Filters_State (p_value         :         Boolean;
                                        p_Filters_State : in out store_Filters_State) is
    begin
       
@@ -125,14 +125,14 @@ package body Log_Filter is
       word_length     : Natural := 0;
       line_to_display : Boolean := False;
       word            : string             (1 .. 40); 
-      Filters_State    : store_Filters_State (1.. p_number_of_filters);
+      Filters_State   : store_Filters_State (1.. p_number_of_filters);
       
    begin
       While not  End_Of_File (file) Loop
          
          line := To_Unbounded_String (Get_Line(file));
          initialize_Filters_State (p_value => false,
-                                  p_Filters_State => Filters_State);
+                                   p_Filters_State => Filters_State);
          
          for I in 1 .. Length(line) loop
             
@@ -162,7 +162,7 @@ package body Log_Filter is
                filter_check(p_filters           => p_filters,
                             p_number_of_filters => p_number_of_filters,
                             p_word              => word,
-                            p_Filters_State      => Filters_State);
+                            p_Filters_State     => Filters_State);
                word_length := 0;
                  
             end if;
@@ -197,7 +197,7 @@ package body Log_Filter is
 
    procedure Set_Filters is 
       
-      User_Filters_Input        : String (1 .. 1000);
+      User_Filters_Input          : String (1 .. 1000);
       Last_Inputs_Position        : Natural;
       number_of_filters : Natural := 1;
       
