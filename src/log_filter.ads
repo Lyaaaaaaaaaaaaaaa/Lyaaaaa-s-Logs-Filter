@@ -21,28 +21,32 @@ package Log_Filter is
    -- ===== functions and procedures declaration =====
    -- I'm using P_variable for parameters name.
    
-   procedure create_filters (P_Number_Of_Filters    : Natural;
+   procedure Create_Filters (P_Number_Of_Filters    : Natural;
                              P_User_Filters_Input   : String;
                              P_Last_Inputs_Position : Natural);
    
-   procedure display_line;
+   procedure Display_Line;
    
-   procedure filter_check (P_Filters           :        store_Filter;
+   procedure Filter_Check (P_Filters           :        store_Filter;
                            P_Number_Of_Filters :        Natural;
                            P_Word              :        String;
                            P_Filters_State     : in out store_Filters_State);
    
-   procedure initialize_Filters_State (P_Value         :        Boolean;
-                                       P_Filters_State : in out store_Filters_State);
+   procedure Initialize_Filters_State (P_Value         :        Boolean;
+                                       P_Filters_State : in out Store_Filters_State);
    
-   procedure read_line (P_Filters           :  store_Filter;
+   procedure Read_File (P_Filters           :  Store_Filter;
                         P_Number_Of_Filters :  Natural);
    
-   procedure select_file (P_File : String);
+   procedure Read_Line (P_Filters           :        Store_Filter;
+                        P_Number_Of_Filters :        Natural;
+                        P_Filters_State     : in out Store_Filters_State);
    
-   procedure set_filters;
+   procedure Select_File (P_File : String);
+   
+   procedure Set_Filters;
 
-   function are_they_all_true (P_Filters_State : store_Filters_State)
+   function Are_They_All_True (P_Filters_State : store_Filters_State)
      return Boolean; 
    
    

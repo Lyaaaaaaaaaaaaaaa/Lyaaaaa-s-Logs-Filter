@@ -50,7 +50,7 @@ package body Log_Filter is
                   
       end loop;
       
-      read_line (filters, p_number_of_filters);
+      Read_File (filters, p_number_of_filters);
             
    end create_filters;
 
@@ -68,8 +68,7 @@ package body Log_Filter is
    procedure Filter_Check (p_filters           :        store_Filter;
                            p_number_of_filters :        Natural;
                            p_word              :        String;
-                           p_Filters_State     : in out store_Filters_State
-                          ) is
+                           p_Filters_State     : in out store_Filters_State) is
 
       are_characters_identical : Boolean := true;
       
@@ -119,56 +118,22 @@ package body Log_Filter is
  
 ----------------------------------------------------------            
 
-   procedure Read_Line (p_filters           : store_Filter;
-                        p_number_of_filters : Natural) is
+   procedure Read_File (P_Filters           : store_Filter;
+                        P_Number_Of_Filters : Natural) is
       
-      word_length     : Natural := 0;
-      line_to_display : Boolean := False;
-      word            : string             (1 .. 40); 
+      
       Filters_State   : store_Filters_State (1.. p_number_of_filters);
       
    begin
-      While not  End_Of_File (file) Loop
+      While not End_Of_File(file) Loop
          
          line := To_Unbounded_String (Get_Line(file));
-         initialize_Filters_State (p_value => false,
+         initialize_Filters_State (P_Value         => false,
                                    p_Filters_State => Filters_State);
          
-         for I in 1 .. Length(line) loop
-            
-            
-            --  We ignore some opening characters to not miss any information
-             --in logs.
-              -- Therefore, a user doesn't need to think about logs syntax.
-               --  So it avoids [carl not being returned when carl is a filter.
-            
-            
-            if Element (line,I) /= ' ' and End_Of_Line (file) = false then
-               
-               if    Element (line,I) /= '[' 
-                 and Element (line,I) /= '(' 
-                 and Element (line,I) /= ''' 
-                 and Element (line,I) /= '"' 
-                 and Element (line,I) /= '<' 
-                 and Element (line,I) /= '{' then
-                  
-                  word_length        := word_length  +  1;
-                  word (word_length) := To_Lower (Element(line,I));
-                  
-               end if;
-                  
-            elsif Element (line,I) = ' ' or End_Of_Line (file) = true then
-               
-               filter_check(p_filters           => p_filters,
-                            p_number_of_filters => p_number_of_filters,
-                            p_word              => word,
-                            p_Filters_State     => Filters_State);
-               word_length := 0;
-                 
-            end if;
-
-           
-         end loop;
+         Read_Line(P_Filters           => P_Filters,
+                   P_Number_Of_Filters => P_Number_Of_Filters,
+                   P_Filters_State     => Filters_State);
          
          if are_they_all_true (Filters_State) = true then
             
@@ -180,9 +145,59 @@ package body Log_Filter is
       
       close (file);
    
-   end read_line;  
+   end Read_File;  
    
-----------------------------------------------------------               
+   ---------------------------------------------------------- 
+   
+   procedure Read_Line (P_Filters           :        Store_Filter;
+                        P_Number_Of_Filters :        Natural;
+                        P_Filters_State     : in out Store_Filters_State) is
+   
+      word_length : Natural := 0;
+      word        : string (1 .. 40); 
+   
+   begin
+      
+      for I in 1 .. Length(line) loop
+            
+            
+            --  We ignore some opening characters to not miss any information
+             --in logs.
+              -- Therefore, a user doesn't need to think about logs syntax.
+               --  So it avoids [carl not being returned when carl is a filter.
+            
+            
+         if Element (line,I) /= ' ' and End_Of_Line (file) = false then
+               
+            if    Element (line,I) /= '[' 
+              and Element (line,I) /= '(' 
+              and Element (line,I) /= ''' 
+              and Element (line,I) /= '"' 
+              and Element (line,I) /= '<'
+              and Element (line,I) /= '*'
+              and Element (line,I) /= '{' then
+                  
+               word_length        := word_length  +  1;
+               word (word_length) := To_Lower (Element(line,I));
+                  
+            end if;
+                  
+         elsif Element (line,I) = ' ' or End_Of_Line (file) = true then
+               
+            filter_check(p_filters           => p_filters,
+                         p_number_of_filters => p_number_of_filters,
+                         p_word              => word,
+                         p_Filters_State     => P_Filters_State);
+            word_length := 0;
+               
+         end if;
+
+           
+      end loop;
+      
+   end Read_Line;
+  
+   ----------------------------------------------------------
    
    procedure Select_File (p_file : String) is
    begin
@@ -190,6 +205,13 @@ package body Log_Filter is
       Open (File => File,
             Mode => In_File,
             Name => p_file);
+      
+      
+   exception 
+      when Ada.Text_IO.Name_Error =>
+           Ada.Text_IO.Put_Line(File => Ada.Text_IO.Standard_Error,
+                                Item => "Can't open file!");
+      
       
    end select_file;
 
