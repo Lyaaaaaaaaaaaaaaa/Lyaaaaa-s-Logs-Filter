@@ -2,7 +2,7 @@ package body Log_Filter is
 
 ----------------------------------------------------------   
    
-   procedure Create_Filters (p_number_of_filters    : Natural;
+   procedure Create_Filters (P_Number_Of_Filters    : Natural;
                              P_User_Filters_Input   : String;
                              P_Last_Inputs_Position : Natural) is
       
@@ -17,7 +17,7 @@ package body Log_Filter is
       Lines_Position   : array_line_control   := 1; 
       
    begin 
-      
+            
       for I in 1 .. P_Last_Inputs_Position loop
          
          if P_User_Filters_Input(I) /= ' ' then
@@ -36,16 +36,18 @@ package body Log_Filter is
             end if;
             
          elsif P_User_Filters_Input(I) = ' ' and I /= 1 then
+            
+            if P_User_Filters_Input(I-1) /= ' ' then
            
-            filters (Lines_Position, Columns_Position) := '|';
-            Lines_Position := 1;
+               filters (Lines_Position, Columns_Position) := '|';
+               Lines_Position := 1;
             
-            if Columns_Position < p_number_of_filters then
+               if Columns_Position < p_number_of_filters then
                
-               Columns_Position := Columns_Position + 1;
-            
+                  Columns_Position := Columns_Position + 1;
+                  
+               end if;
             end if;
-            
          end if;
                   
       end loop;
@@ -79,15 +81,15 @@ package body Log_Filter is
          are_characters_identical := true;
 
          for Y in 1 .. 40 loop
-
+                        
             if are_characters_identical = true then
                
-               if p_filters(Y,I) /= p_word(Y)     and p_filters(Y,I) /= '|'           then
+               if p_filters(Y,I) /= p_word(Y) and p_filters(Y,I) /= '|'           then
                   
                   are_characters_identical := false;
                   
-               elsif p_filters (Y,I) = '|'        and are_characters_identical = true then
-                  
+               elsif p_filters (Y,I) = '|'    and are_characters_identical = true then
+               
                   p_Filters_State (I) := true;
                   
                end if;
@@ -147,7 +149,7 @@ package body Log_Filter is
    
    end Read_File;  
    
-   ---------------------------------------------------------- 
+----------------------------------------------------------            
    
    procedure Read_Line (P_Filters           :        Store_Filter;
                         P_Number_Of_Filters :        Natural;
@@ -197,7 +199,7 @@ package body Log_Filter is
       
    end Read_Line;
   
-   ----------------------------------------------------------
+----------------------------------------------------------            
    
    procedure Select_File (p_file : String) is
    begin
