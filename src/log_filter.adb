@@ -130,6 +130,7 @@ package body Log_Filter is
       While not End_Of_File(file) Loop
          
          line := To_Unbounded_String (Get_Line(file));
+         
          initialize_Filters_State (P_Value         => false,
                                    p_Filters_State => Filters_State);
          
@@ -169,7 +170,7 @@ package body Log_Filter is
                --  So it avoids [carl not being returned when carl is a filter.
             
             
-         if Element (line,I) /= ' ' and End_Of_Line (file) = false then
+         if Element (line,I) /= ' '  then
                
             if    Element (line,I) /= '[' 
               and Element (line,I) /= '(' 
@@ -193,8 +194,7 @@ package body Log_Filter is
             word_length := 0;
                
          end if;
-
-           
+    
       end loop;
       
    end Read_Line;
