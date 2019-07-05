@@ -12,6 +12,9 @@ In addition, in gaming communities, it's important for servers staff to monitor 
 2. Create an interface.  *Done*
 3. Connect the interface to the previous package. *WIP*
 
+## Preview:
+![Application preview](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/blob/master/interface/Preview/Preview1.png)
+
 ## More information:
 [Code of conduit](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CODE_OF_CONDUCT.md)
 
