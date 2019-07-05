@@ -2,13 +2,46 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkEntryBuffer" id="Entry_Filter_Input_Buffer"/>
+  <object class="GtkFileChooserDialog" id="File_Chooser_Dialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkImage" id="Image_Button_Start">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="halign">end</property>
     <property name="stock">gtk-apply</property>
   </object>
-  <object class="GtkWindow">
+  <object class="GtkTextBuffer" id="Text_View_Output_Buffer"/>
+  <object class="GtkWindow" id="Main_Window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Lyaaaaa's Logs Filter</property>
     <child>
@@ -88,6 +121,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="tooltip_text" translatable="yes">Enter your filters by separating them with a whitespace</property>
+                        <property name="buffer">Entry_Filter_Input_Buffer</property>
                         <property name="placeholder_text" translatable="yes">Example : attack thief dagger 19:40</property>
                       </object>
                       <packing>
@@ -126,12 +160,12 @@
                       <object class="GtkFileChooserButton" id="File_Chooser_Button">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="dialog">File_Chooser_Dialog</property>
                         <property name="title" translatable="yes"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="padding">35</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -153,7 +187,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSpinner" id="Spinner_Start">
+                      <object class="GtkSpinner" id="Spinner">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -188,6 +222,7 @@
                         <property name="tooltip_text" translatable="yes">The filtered lines will appear here</property>
                         <property name="editable">False</property>
                         <property name="wrap_mode">word</property>
+                        <property name="buffer">Text_View_Output_Buffer</property>
                       </object>
                     </child>
                   </object>
