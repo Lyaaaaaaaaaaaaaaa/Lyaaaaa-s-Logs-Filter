@@ -14,7 +14,7 @@ In addition, in gaming communities, it's important for servers staff to monitor 
 
 ## Preview:
 ![Application preview](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/blob/master/interface/Preview/Preview1.png)
-
+*Default appearance theme is white*
 ## More information:
 [Code of conduit](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CODE_OF_CONDUCT.md)
 
