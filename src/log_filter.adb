@@ -12,7 +12,7 @@ package body Log_Filter is
       subtype array_line_control is
         Natural range 1 .. 40;   
       
-      filters          : store_filter(1 .. 40, 1..p_number_of_filters);
+      filters          : store_filter (1 .. 40, 1..p_number_of_filters);
       Columns_Position : array_column_control := 1; 
       Lines_Position   : array_line_control   := 1; 
       
@@ -20,24 +20,24 @@ package body Log_Filter is
             
       for I in 1 .. P_Last_Inputs_Position loop
          
-         if P_User_Filters_Input(I) /= ' ' then
+         if P_User_Filters_Input (I) /= ' ' then
                         
             --  We use To_Lower to store filters in lower case in a variable.
               --  So we won't miss the word carl because the user entered Carl.
             
-            filters (Lines_Position, Columns_Position) := To_Lower (P_User_Filters_Input(I)); 
+            filters (Lines_Position, Columns_Position) := To_Lower (P_User_Filters_Input (I)); 
            
             Lines_Position := Lines_Position + 1;  
             
             if I = P_Last_Inputs_Position then
                
-               filters(Lines_Position, Columns_Position) := '|';
+               filters (Lines_Position, Columns_Position) := '|';
                
             end if;
             
-         elsif P_User_Filters_Input(I) = ' ' and I /= 1 then
+         elsif P_User_Filters_Input (I) = ' ' and I /= 1 then
             
-            if P_User_Filters_Input(I-1) /= ' ' then
+            if P_User_Filters_Input (I-1) /= ' ' then
            
                filters (Lines_Position, Columns_Position) := '|';
                Lines_Position := 1;
@@ -62,6 +62,8 @@ package body Log_Filter is
    begin
       
       Text_IO.Unbounded_IO.Put_Line (line);
+      Lines       := Lines & line;
+      Lines_Count := Lines_Count + 1;
       
    end display_line;
 
@@ -84,7 +86,7 @@ package body Log_Filter is
                         
             if are_characters_identical = true then
                
-               if p_filters(Y,I) /= p_word(Y) and p_filters(Y,I) /= '|'           then
+               if p_filters (Y,I) /= p_word (Y) and p_filters (Y,I) /= '|'        then
                   
                   are_characters_identical := false;
                   
@@ -101,7 +103,7 @@ package body Log_Filter is
          
       end loop;
       
-   end filter_check;   
+   end Filter_Check;   
  
 ----------------------------------------------------------         
 
@@ -116,7 +118,7 @@ package body Log_Filter is
       end loop;
       
       
-   end initialize_Filters_State;
+   end Initialize_Filters_State;
  
 ----------------------------------------------------------            
 
@@ -131,7 +133,7 @@ package body Log_Filter is
          
          line := To_Unbounded_String (Get_Line(file));
          
-         initialize_Filters_State (P_Value         => false,
+         Initialize_Filters_State (P_Value         => false,
                                    p_Filters_State => Filters_State);
          
          Read_Line(P_Filters           => P_Filters,
@@ -140,7 +142,7 @@ package body Log_Filter is
          
          if are_they_all_true (Filters_State) = true then
             
-            display_line;
+            Display_line;
             
          end if;
          
@@ -156,12 +158,12 @@ package body Log_Filter is
                         P_Number_Of_Filters :        Natural;
                         P_Filters_State     : in out Store_Filters_State) is
    
-      word_length : Natural := 0;
-      word        : string (1 .. 40); 
+      Word_Length : Natural := 0;
+      Word        : string (1 .. 40); 
    
    begin
       
-      for I in 1 .. Length(line) loop
+      for I in 1 .. Length (line) loop
             
             
             --  We ignore some opening characters to not miss any information
@@ -187,11 +189,11 @@ package body Log_Filter is
                   
          elsif Element (line,I) = ' ' or End_Of_Line (file) = true then
                
-            filter_check(p_filters           => p_filters,
-                         p_number_of_filters => p_number_of_filters,
-                         p_word              => word,
-                         p_Filters_State     => P_Filters_State);
-            word_length := 0;
+            Filter_Check (P_filters           => P_filters,
+                          P_number_of_filters => P_number_of_filters,
+                          P_word              => word,
+                          P_Filters_State     => P_Filters_State);
+            Word_Length := 0;
                
          end if;
     
@@ -215,36 +217,32 @@ package body Log_Filter is
                                 Item => "Can't open file!");
       
       
-   end select_file;
+   end Select_File;
 
 ----------------------------------------------------------            
 
-   procedure Set_Filters is 
+   procedure Set_Filters (P_Filters : String) is 
       
-      User_Filters_Input          : String (1 .. 1000);
       Last_Inputs_Position        : Natural;
-      number_of_filters : Natural := 1;
+      Number_Of_Filters : Natural := 1;
       
    begin
       
-      Put ("Enter filters : ");
-      Get_Line (User_Filters_Input, Last_Inputs_Position);
-      Put_Line ("");
-      
+      Last_Inputs_Position := P_Filters'Last;
       
       for I in 1 .. Last_Inputs_Position loop
          
-         if User_Filters_Input(I) = ' '  and I /= 1 then
+         if P_Filters (I) = ' '  and I /= 1 then
             
-            if User_Filters_Input(I-1) /= ' ' then
+            if P_Filters (I-1) /= ' ' then
                
-               number_of_filters := number_of_filters +1;
+               Number_Of_Filters := Number_Of_Filters +1;
                
             end if;
              
-            if I = Last_Inputs_Position and User_Filters_Input(I) = ' ' then
+            if I = Last_Inputs_Position and P_Filters(I) = ' ' then
                
-               number_of_filters := number_of_filters -1;
+               Number_Of_Filters := Number_Of_Filters -1;
                
             end if;
             
@@ -252,20 +250,38 @@ package body Log_Filter is
       
       end loop;
       
-      create_filters (number_of_filters, User_Filters_Input, Last_Inputs_Position);
+      Create_Filters (Number_Of_Filters, P_Filters, Last_Inputs_Position);
       
-   end set_filters;
+   end Set_Filters;
+----------------------------------------------------------               
 
+   procedure Reset_Lines is
+   
+   begin
+      
+      Lines := To_Unbounded_String("");
+   end Reset_Lines;
+   
 ----------------------------------------------------------               
    
-   function Are_They_All_True (p_Filters_State : store_Filters_State) 
+   procedure Reset_Lines_Count is
+   
+   begin
+   
+      Lines_Count := 0;
+      
+   end Reset_Lines_Count;
+   
+----------------------------------------------------------               
+   
+   function Are_They_All_True (P_Filters_State : Store_Filters_State) 
      return Boolean is
          
    begin
    
-      for I in p_Filters_State'Range loop
+      for I in P_Filters_State'Range loop
          
-         if p_Filters_State(I)  =  false then
+         if P_Filters_State (I)  =  false then
             
             return false;
             
@@ -275,8 +291,28 @@ package body Log_Filter is
       
       return true;
       
-   end are_they_all_true;
+   end Are_They_All_True;
 
 ----------------------------------------------------------               
+
+   function Get_Lines
+     return String is
+      
+   begin
+      
+      return To_String (Lines);
+      
+   end Get_Lines;
    
+   ----------------------------------------------------------
+   
+   function Get_Lines_Count
+     return Integer is
+      
+   begin
+      
+      return Lines_Count;
+      
+   end Get_Lines_Count;
+      
 end Log_Filter;

@@ -1,16 +1,16 @@
-with Log_Filter; use Log_Filter;
-with Text_IO; use Text_IO;
+--Custom include
+
+with Log_Filter_Handlers;
+
+
 procedure Log_Filter_Main is
-
-
 
 begin
 
-
-   select_file ("./18th L.txt"); --shall later make it dynamic (with the interface)
-   set_filters;
-
-
+   Log_Filter_Handlers.Init;
+   Log_Filter_Handlers.Connect_Interface;
+   Log_Filter_Handlers.Register_Handlers;
+   Log_Filter_Handlers.Start_Interface;
 
    null;
 end Log_Filter_Main;
