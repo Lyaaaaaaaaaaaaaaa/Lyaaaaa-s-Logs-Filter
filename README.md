@@ -19,3 +19,5 @@ In addition, in gaming communities, it's important for servers staff to monitor 
 [Code of conduit](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CODE_OF_CONDUCT.md)
 
 [How to contribute](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CONTRIBUTING.md)
+
+[Contributors](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/blob/master/CONTRIBUTORS.md)
