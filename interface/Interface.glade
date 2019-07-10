@@ -32,35 +32,86 @@ Author: Lyaaaaaaaaaaaaaaa
   <!-- interface-name Lyaaaaa's Logs Filter -->
   <!-- interface-authors Lyaaaaaaaaaaaaaaa -->
   <object class="GtkEntryBuffer" id="Entry_Filter_Input_Buffer"/>
-  <object class="GtkFileChooserDialog" id="File_Chooser_Dialog">
+  <object class="GtkAssistant" id="Help_Assistant">
     <property name="can_focus">False</property>
-    <property name="type_hint">dialog</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
+    <property name="window_position">center</property>
+    <property name="use_header_bar">1</property>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
+        <property name="label" translatable="yes" comments="Try to keep this as simple as possible.">Welcome to this tutorial.
+
+Let's begin by selecting a file. This software needs a file to work.
+
+Click on the "Select file" button.
+
+Now browse through your files until you found the file you want to filter.
+
+Once done you can click on "Next".</property>
       </object>
+      <packing>
+        <property name="page_type">intro</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Now, insert the words you are looking for in the text area after "Filters:"
+
+You can insert multiple words like this:
+"Arthur gold take" You have to insert  whitespace between two words. 
+The software isn't case sensitive. Therefore, no need to worry about uppercase.
+
+The software will only display the lines where all your words appear.
+
+Once done you can click on "Next".</property>
+      </object>
+      <packing>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Now you only need to press the "Start" button.
+
+It will display you all the lines where all your words appear.
+
+If nothing appears it means your words aren't present together into a single line within the file.
+
+Give it another try by entering new words.
+Starting with one word, then adding more afterwards is a good way to sharpen the search.
+
+You don't have to reload the file every time you press start.
+You simply can change the filters, it will keep looking in it until you change the file.
+
+You will be more efficient if you know the structure of the logs you are looking through.
+Open your file with a text editor and understand its syntax, then try again this software.
+
+That's all! You can close this window.
+
+For more information check the wiki! https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/wiki</property>
+      </object>
+      <packing>
+        <property name="page_type">confirm</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <placeholder/>
     </child>
   </object>
   <object class="GtkImage" id="Image_Button_Start">
@@ -92,12 +143,12 @@ Author: Lyaaaaaaaaaaaaaaa
                 <property name="label" translatable="yes">Help</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu">
+                  <object class="GtkMenu" id="Help_Menu">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem">
-                        <property name="label">gtk-about</property>
+                        <property name="label">gtk-help</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -186,17 +237,7 @@ Author: Lyaaaaaaaaaaaaaaa
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFileChooserButton" id="File_Chooser_Button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="dialog">File_Chooser_Dialog</property>
-                        <property name="title" translatable="yes"/>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
+                      <placeholder/>
                     </child>
                     <child>
                       <object class="GtkButton" id="Button_Start">
