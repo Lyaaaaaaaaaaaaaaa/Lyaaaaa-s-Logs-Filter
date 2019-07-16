@@ -52,6 +52,7 @@ package Log_Filter_Handlers is
    Help_Menu_Item       :         Gtk_Menu_Item;
    About_Menu_Item      :         Gtk_Menu_Item;
    About_Dialog         :         Gtk_About_Dialog;
+   Spinner              :         Gtk_Spinner;
 --   File_Chooser_Button  :         Gtk_File_Chooser_Button;
 --   File_Chooser_Dialog  :         Gtk_File_Chooser_Dialog;
 

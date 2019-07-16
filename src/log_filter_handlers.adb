@@ -49,9 +49,11 @@ package body Log_Filter_Handlers is
       About_Dialog       :=
         Gtk_About_Dialog (Builder.Get_Object ("About_Dialog") );
 
-    Button_Select_File :=
+      Button_Select_File :=
         Gtk_Button       (Builder.Get_Object ("Button_Select_File") );
             
+      Spinner            :=
+        Gtk_Spinner      (Builder.Get_Object ("Spinner") );
    end Connect_Interface;
 
 ----------------------------------------------------------
@@ -119,7 +121,7 @@ package body Log_Filter_Handlers is
       Last_Iter  : Gtk_Text_Iter;
       
    begin
-             
+      Spinner.Start; 
       Application_Output.Get_Bounds (Start   => First_Iter,
                                      The_End => Last_Iter);
       Application_Output.Delete     (Start   => First_Iter,
@@ -133,6 +135,7 @@ package body Log_Filter_Handlers is
       
       Log_Filter.Reset_Lines;
       Log_Filter.Reset_Lines_Count;
+      Spinner.Stop;
       
    end Button_Start_Clicked;
    
