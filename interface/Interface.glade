@@ -36,12 +36,13 @@ Author: Lyaaaaaaaaaaaaaaa
     <property name="type_hint">dialog</property>
     <property name="program_name">Lyaaaaa's Logs Filter</property>
     <property name="version">x.x</property>
+    <property name="copyright" translatable="yes">Copyright (c) 2019</property>
     <property name="website">https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter</property>
     <property name="website_label" translatable="yes">My GitHub</property>
     <property name="authors">Lyaaaaaaaaaaaaaaa</property>
     <property name="logo">../../../../../../../../../home/luis/Images/44974422.jpg</property>
     <property name="license_type">mit-x11</property>
-    <child>
+    <child type="titlebar">
       <placeholder/>
     </child>
     <child internal-child="vbox">
@@ -135,7 +136,7 @@ Open your file with a text editor and understand its syntax, then try again this
 
 That's all! You can close this window.
 
-For more information check the wiki! https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/wiki</property>
+For more information check the wiki on GitHub!</property>
       </object>
       <packing>
         <property name="page_type">confirm</property>
