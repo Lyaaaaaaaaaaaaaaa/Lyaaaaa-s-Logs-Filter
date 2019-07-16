@@ -31,6 +31,47 @@ Author: Lyaaaaaaaaaaaaaaa
   <!-- interface-license-type mit -->
   <!-- interface-name Lyaaaaa's Logs Filter -->
   <!-- interface-authors Lyaaaaaaaaaaaaaaa -->
+  <object class="GtkAboutDialog" id="About_Dialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="program_name">Lyaaaaa's Logs Filter</property>
+    <property name="version">x.x</property>
+    <property name="website">https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter</property>
+    <property name="website_label" translatable="yes">My GitHub</property>
+    <property name="authors">Lyaaaaaaaaaaaaaaa</property>
+    <property name="logo">../../../../../../../../../home/luis/Images/44974422.jpg</property>
+    <property name="license_type">mit-x11</property>
+    <child>
+      <placeholder/>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkEntryBuffer" id="Entry_Filter_Input_Buffer"/>
   <object class="GtkAssistant" id="Help_Assistant">
     <property name="can_focus">False</property>
@@ -137,6 +178,14 @@ For more information check the wiki! https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaa
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
+              <object class="GtkMenuItem" id="Menu_Item_About">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">About</property>
+                <property name="use_underline">True</property>
+              </object>
+            </child>
+            <child>
               <object class="GtkMenuItem" id="Menu_Item_Help">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -237,7 +286,18 @@ For more information check the wiki! https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaa
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="GtkButton" id="Button_Select_File">
+                        <property name="label" translatable="yes">Select File</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Click here to select your file</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="Button_Start">
@@ -245,6 +305,7 @@ For more information check the wiki! https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaa
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Click here to start filtering the file.</property>
                         <property name="halign">end</property>
                         <property name="margin_left">274</property>
                         <property name="image">Image_Button_Start</property>
@@ -290,6 +351,8 @@ For more information check the wiki! https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaa
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="tooltip_text" translatable="yes">The filtered lines will appear here</property>
+                        <property name="pixels_below_lines">6</property>
+                        <property name="pixels_inside_wrap">1</property>
                         <property name="editable">False</property>
                         <property name="wrap_mode">word</property>
                         <property name="buffer">Text_View_Output_Buffer</property>
