@@ -25,7 +25,8 @@ package body Log_Filter is
             --  We use To_Lower to store filters in lower case in a variable.
               --  So we won't miss the word carl because the user entered Carl.
             
-            filters (Lines_Position, Columns_Position) := To_Lower (P_User_Filters_Input (I)); 
+            filters (Lines_Position, Columns_Position) :=
+              To_Lower (P_User_Filters_Input (I)); 
            
             Lines_Position := Lines_Position + 1;  
             
@@ -40,7 +41,7 @@ package body Log_Filter is
             if P_User_Filters_Input (I-1) /= ' ' then
            
                filters (Lines_Position, Columns_Position) := '|';
-               Lines_Position := 1;
+               Lines_Position                             := 1;
             
                if Columns_Position < p_number_of_filters then
                
@@ -86,11 +87,13 @@ package body Log_Filter is
                         
             if are_characters_identical = true then
                
-               if p_filters (Y,I) /= p_word (Y) and p_filters (Y,I) /= '|'        then
+               if p_filters (Y,I) /= p_word (Y) 
+                 and p_filters (Y,I) /= '|'          then
                   
                   are_characters_identical := false;
                   
-               elsif p_filters (Y,I) = '|'    and are_characters_identical = true then
+               elsif p_filters (Y,I) = '|'   
+                 and are_characters_identical = true then
                
                   p_Filters_State (I) := true;
                   
@@ -131,7 +134,7 @@ package body Log_Filter is
    begin
       While not End_Of_File(file) Loop
          
-         line := To_Unbounded_String (Get_Line(file));
+         line := To_Unbounded_String (Get_Line(file) );
          
          Initialize_Filters_State (P_Value         => false,
                                    p_Filters_State => Filters_State);
@@ -213,12 +216,26 @@ package body Log_Filter is
       
    exception 
       when Ada.Text_IO.Name_Error =>
-           Ada.Text_IO.Put_Line(File => Ada.Text_IO.Standard_Error,
-                                Item => "Can't open file!");
+           Ada.Text_IO.Put_Line (File => Ada.Text_IO.Standard_Error,
+                                 Item => "Can't open file!");
       
       
    end Select_File;
-
+   
+----------------------------------------------------------            
+   
+   procedure Close_File is
+   begin
+   
+      if Is_Open (File) = True then
+      
+         Close(File);
+      
+      end if;
+         
+         
+   end Close_File;
+   
 ----------------------------------------------------------            
 
    procedure Set_Filters (P_Filters : String) is 
@@ -304,7 +321,17 @@ package body Log_Filter is
       
    end Get_Lines;
    
-   ----------------------------------------------------------
+----------------------------------------------------------
+ 
+   function Get_File_Name
+     return String is
+   
+   begin
+      
+      return Name (File);
+      
+   end Get_File_Name;
+----------------------------------------------------------
    
    function Get_Lines_Count
      return Integer is

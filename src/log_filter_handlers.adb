@@ -16,7 +16,7 @@ package body Log_Filter_Handlers is
        
       Return_Code := Add_From_File 
         (Builder  => Builder,
-         Filename => "interface/Interface.glade",
+         Filename => "interface.glade",
          Error    => Error'Access);  
       
       if Error /= null then
@@ -43,8 +43,14 @@ package body Log_Filter_Handlers is
       Help_Menu_Item     :=
         Gtk_Menu_Item    (Builder.Get_Object ("Menu_Item_Help") );
       
- --     Button_Select_File :=
-   --     Gtk_Button       (Builder.Get_Object ("Button_Select_File") );
+      About_Menu_Item    :=
+        Gtk_Menu_Item    (Builder.Get_Object ("Menu_Item_About") );
+      
+      About_Dialog       :=
+        Gtk_About_Dialog (Builder.Get_Object ("About_Dialog") );
+
+    Button_Select_File :=
+        Gtk_Button       (Builder.Get_Object ("Button_Select_File") );
             
    end Connect_Interface;
 
@@ -59,9 +65,10 @@ package body Log_Filter_Handlers is
       Help_Assistant.On_Cancel       (Quit_Assistant'Access);
       Help_Assistant.On_Apply        (Display_Next_Page'Access);
       Help_Assistant.On_Close        (Quit_Assistant'Access);
+      About_Menu_Item.On_Select      (Display_About'Access);
       
       --Help_Assistant.On_Destroy     (Quit_Assistant'Access);
-      --Button_Select_File.On_Clicked (Button_Select_File_Clicked'Access);
+      Button_Select_File.On_Clicked (Button_Select_File_Clicked'Access);
       
       
 
@@ -74,7 +81,7 @@ package body Log_Filter_Handlers is
       
 --   end Init_Objects;
    
-   ----------------------------------------------------------
+----------------------------------------------------------
    
    procedure Start_Interface is
    begin
@@ -114,14 +121,14 @@ package body Log_Filter_Handlers is
       Last_Iter  : Gtk_Text_Iter;
       
    begin
-      
+            
       Application_Output.Get_Bounds(Start   => First_Iter,
                                     The_End => Last_Iter);
       
       Application_Output.Delete    (Start   => First_Iter,
                                     The_End => Last_Iter);
       
-      Log_Filter.Select_File       ("./18th L.txt");
+      Log_Filter.Select_File (To_String (Retour) );
       Log_Filter.Set_Filters       (Get_Text (Filters_Entry) );
       Application_Output.Set_Text  (Text =>  Log_Filter.Get_Lines);
       
@@ -133,10 +140,10 @@ package body Log_Filter_Handlers is
 ----------------------------------------------------------             
    
    procedure Button_Select_File_Clicked
-     (Self              : access Gtk_Button_Record'Class) is
-   
+     (Self              : access Gtk_Button_Record'Class) is   
    begin
 
+      Log_Filter.Close_File;
       Retour := To_Unbounded_String
         (File_Selection_Dialog (Title       => "Select your file",
                                 Default_Dir => "",
@@ -192,7 +199,30 @@ package body Log_Filter_Handlers is
       
    end Display_Next_Page;
    
-----------------------------------------------------------             
+----------------------------------------------------------
+   
+   procedure Display_About
+     (self              : access Gtk_Menu_Item_Record'Class) is
+   begin
+   
+     About_Dialog.Show_All;
+      
+   end Display_About;
+
+----------------------------------------------------------
+
+   procedure Quit_About
+     (self              : access Gtk_About_Dialog_Record'Class) is
+   begin
+      
+      About_Dialog.Hide;
+      About_Dialog.Unref;
+      
+      
+   end Quit_About;
+   
+----------------------------------------------------------
+
    function Status_Message
      return String is
       

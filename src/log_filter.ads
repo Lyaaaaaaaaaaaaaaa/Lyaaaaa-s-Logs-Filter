@@ -50,6 +50,8 @@ package Log_Filter is
    procedure Select_File 
      (P_File                 :        String);
    
+   procedure Close_File;
+   
    procedure Set_Filters 
      (P_Filters              :        String);
    
@@ -62,6 +64,9 @@ package Log_Filter is
      return Boolean; 
    
    function Get_Lines
+     return String;
+   
+   function Get_File_Name
      return String;
    
    function Get_Lines_Count

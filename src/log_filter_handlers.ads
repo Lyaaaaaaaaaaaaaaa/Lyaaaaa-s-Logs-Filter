@@ -21,7 +21,7 @@ with Gtk.Text_Buffer;         use Gtk.Text_Buffer;
 with Gtkada.Handlers;         use Gtkada.Handlers;
 with Gtk.Entry_Buffer;        use Gtk.Entry_Buffer;
 with Gtkada.File_Selection;   use Gtkada.File_Selection;
-
+with Gtk.About_Dialog;        use Gtk.About_Dialog;
 
 --With Gtk.File_Chooser;        use Gtk.File_Chooser;
 --with Gtk.File_Chooser_Button; use Gtk.File_Chooser_Button;
@@ -50,6 +50,8 @@ package Log_Filter_Handlers is
    Retour               :         Unbounded_String;
    Help_Assistant       :         Gtk_Assistant;
    Help_Menu_Item       :         Gtk_Menu_Item;
+   About_Menu_Item      :         Gtk_Menu_Item;
+   About_Dialog         :         Gtk_About_Dialog;
 --   File_Chooser_Button  :         Gtk_File_Chooser_Button;
 --   File_Chooser_Dialog  :         Gtk_File_Chooser_Dialog;
 
@@ -107,6 +109,18 @@ package Log_Filter_Handlers is
      (self              : access Gtk_Assistant_Record'Class);
     -- Hide the assistant dialog and unref it.
 
+
+   -----------------
+   --    About    --
+   -----------------
+
+   procedure Display_About
+     (self              : access Gtk_Menu_Item_Record'Class);
+    -- Show the about dialog.
+
+   procedure Quit_About
+     (self              : access Gtk_About_Dialog_Record'Class);
+    -- Hide the about dialog and unref it.
 
    -------------------
    --   Functions   --
