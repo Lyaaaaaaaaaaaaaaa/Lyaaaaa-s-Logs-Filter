@@ -62,8 +62,7 @@ package body Log_Filter is
    procedure Display_Line is
    begin
       
-      Text_IO.Unbounded_IO.Put_Line (line);
-      Lines       := Lines & line;
+      Lines       := Lines & line & ASCII.LF;
       Lines_Count := Lines_Count + 1;
       
    end display_line;

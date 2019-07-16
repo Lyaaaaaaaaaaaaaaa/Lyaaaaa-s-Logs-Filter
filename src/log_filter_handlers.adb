@@ -66,9 +66,7 @@ package body Log_Filter_Handlers is
       Help_Assistant.On_Apply        (Display_Next_Page'Access);
       Help_Assistant.On_Close        (Quit_Assistant'Access);
       About_Menu_Item.On_Select      (Display_About'Access);
-      
-      --Help_Assistant.On_Destroy     (Quit_Assistant'Access);
-      Button_Select_File.On_Clicked (Button_Select_File_Clicked'Access);
+      Button_Select_File.On_Clicked  (Button_Select_File_Clicked'Access);
       
       
 
@@ -121,16 +119,17 @@ package body Log_Filter_Handlers is
       Last_Iter  : Gtk_Text_Iter;
       
    begin
-            
-      Application_Output.Get_Bounds(Start   => First_Iter,
-                                    The_End => Last_Iter);
+             
+      Application_Output.Get_Bounds (Start   => First_Iter,
+                                     The_End => Last_Iter);
+      Application_Output.Delete     (Start   => First_Iter,
+                                     The_End => Last_Iter);
       
-      Application_Output.Delete    (Start   => First_Iter,
-                                    The_End => Last_Iter);
+      Log_Filter.Select_File       (To_String (Retour) );
+      Log_Filter.Set_Filters       (Get_Text  (Filters_Entry) );
       
-      Log_Filter.Select_File (To_String (Retour) );
-      Log_Filter.Set_Filters       (Get_Text (Filters_Entry) );
-      Application_Output.Set_Text  (Text =>  Log_Filter.Get_Lines);
+      Application_Output.Set_Text          (Text    => Status_Message);
+      Application_Output.Insert_At_Cursor  (Text =>  Log_Filter.Get_Lines);
       
       Log_Filter.Reset_Lines;
       Log_Filter.Reset_Lines_Count;
@@ -229,13 +228,16 @@ package body Log_Filter_Handlers is
       Message : Unbounded_String;
       
    begin
-      -- WIP AREA
       
       Message := 
-          To_Unbounded_String ("==== ")
-        & To_Unbounded_String (Log_Filter.Get_Lines_Count)
-        -- doesn't work, need to convert int into string.
-        & To_Unbounded_String (" Valid lines ====");
+        To_Unbounded_String ("---------------------------------------------")
+        & ASCII.LF
+        & "                                        "
+        & To_Unbounded_String (Integer'Image (Log_Filter.Get_Lines_Count) )
+        & To_Unbounded_String (" Valid lines found")
+        & ASCII.LF
+        & "---------------------------------------------"
+        & ASCII.LF;
               
       
       return To_String (Message);

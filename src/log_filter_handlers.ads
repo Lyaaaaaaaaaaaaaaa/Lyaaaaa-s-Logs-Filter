@@ -20,8 +20,8 @@ with Gtkada.Builder;          use Gtkada.Builder;
 with Gtk.Text_Buffer;         use Gtk.Text_Buffer;
 with Gtkada.Handlers;         use Gtkada.Handlers;
 with Gtk.Entry_Buffer;        use Gtk.Entry_Buffer;
-with Gtkada.File_Selection;   use Gtkada.File_Selection;
 with Gtk.About_Dialog;        use Gtk.About_Dialog;
+with Gtkada.File_Selection;   use Gtkada.File_Selection;
 
 --With Gtk.File_Chooser;        use Gtk.File_Chooser;
 --with Gtk.File_Chooser_Button; use Gtk.File_Chooser_Button;
