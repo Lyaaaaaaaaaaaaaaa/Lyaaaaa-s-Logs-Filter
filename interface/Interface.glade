@@ -279,6 +279,8 @@ For more information check the wiki on GitHub!</property>
                         <property name="halign">baseline</property>
                         <property name="margin_left">3</property>
                         <property name="label" translatable="yes">Select a file : </property>
+                        <property name="selectable">True</property>
+                        <property name="ellipsize">start</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
