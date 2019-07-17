@@ -12,6 +12,7 @@ with Gtk.Widget;              use Gtk.Widget;
 with Glib.Error;              use Glib.Error;
 with Gtk.Window;              use Gtk.Window;
 with Gtk.Spinner;             use Gtk.Spinner;
+with gtk.Dialog;              use gtk.Dialog;
 with Gtk.Text_Iter;           use Gtk.Text_Iter;
 with Gtk.Text_View;           use Gtk.Text_View;
 with Gtk.Assistant;           use Gtk.Assistant;
@@ -53,6 +54,7 @@ package Log_Filter_Handlers is
    About_Menu_Item      :         Gtk_Menu_Item;
    About_Dialog         :         Gtk_About_Dialog;
    Spinner              :         Gtk_Spinner;
+   File_Label           :         Gtk_Label;
 --   File_Chooser_Button  :         Gtk_File_Chooser_Button;
 --   File_Chooser_Dialog  :         Gtk_File_Chooser_Dialog;
 
@@ -120,7 +122,7 @@ package Log_Filter_Handlers is
     -- Show the about dialog.
 
    procedure Quit_About
-     (self              : access Gtk_About_Dialog_Record'Class);
+     (self              : access Gtk_Dialog_Record'Class);
     -- Hide the about dialog and unref it.
 
    -------------------

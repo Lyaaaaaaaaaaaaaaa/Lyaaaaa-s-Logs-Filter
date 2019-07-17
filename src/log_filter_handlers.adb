@@ -16,7 +16,7 @@ package body Log_Filter_Handlers is
        
       Return_Code := Add_From_File 
         (Builder  => Builder,
-         Filename => "interface.glade",
+         Filename => "./interface/Interface.glade",
          Error    => Error'Access);  
       
       if Error /= null then
@@ -54,6 +54,10 @@ package body Log_Filter_Handlers is
             
       Spinner            :=
         Gtk_Spinner      (Builder.Get_Object ("Spinner") );
+      
+      File_Label         :=
+        Gtk_Label        (Builder.Get_Object ("Label_File_Chooser") );
+        
    end Connect_Interface;
 
 ----------------------------------------------------------
@@ -63,13 +67,13 @@ package body Log_Filter_Handlers is
 
       Button_Start.On_Clicked        (Button_Start_Clicked'Access);
       Main_Window.On_Destroy         (Quit'Access);
-      Help_Menu_Item.On_Select       (Display_Help_Assistant'Access);
+      Help_Menu_Item.On_Activate     (Display_Help_Assistant'Access);
       Help_Assistant.On_Cancel       (Quit_Assistant'Access);
       Help_Assistant.On_Apply        (Display_Next_Page'Access);
       Help_Assistant.On_Close        (Quit_Assistant'Access);
-      About_Menu_Item.On_Select      (Display_About'Access);
+      About_Menu_Item.On_Activate    (Display_About'Access);
+      About_Dialog.On_Close          (Quit_About'Access);
       Button_Select_File.On_Clicked  (Button_Select_File_Clicked'Access);
-      
       
 
    end Register_Handlers;
@@ -106,9 +110,9 @@ package body Log_Filter_Handlers is
 
    procedure Quit_Assistant (self : access Gtk_Assistant_Record'Class) is
    begin
-      
+
       Help_Assistant.Hide;
-      Help_Assistant.Unref;
+      Help_Assistant.Close;
       
    end Quit_Assistant;
      
@@ -151,6 +155,7 @@ package body Log_Filter_Handlers is
                                 Default_Dir => "",
                                 Dir_Only    => False,
                                 Must_Exist  => True) );
+      File_Label.Set_Text (To_String (Retour) );
       
    end Button_Select_File_Clicked;
 
@@ -214,11 +219,11 @@ package body Log_Filter_Handlers is
 ----------------------------------------------------------
 
    procedure Quit_About
-     (self              : access Gtk_About_Dialog_Record'Class) is
+     (self              : access Gtk_Dialog_Record'Class) is
    begin
       
       About_Dialog.Hide;
-      About_Dialog.Unref;
+      About_Dialog.Close;
       
       
    end Quit_About;
@@ -235,7 +240,7 @@ package body Log_Filter_Handlers is
       Message := 
         To_Unbounded_String ("---------------------------------------------")
         & ASCII.LF
-        & "                                        "
+        & "                                 "
         & To_Unbounded_String (Integer'Image (Log_Filter.Get_Lines_Count) )
         & To_Unbounded_String (" Valid lines found")
         & ASCII.LF
