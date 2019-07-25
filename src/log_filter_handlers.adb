@@ -16,7 +16,7 @@ package body Log_Filter_Handlers is
        
       Return_Code := Add_From_File 
         (Builder  => Builder,
-         Filename => "./interface/Interface.glade",
+         Filename => "Interface.glade",
          Error    => Error'Access);  
       
       if Error /= null then
@@ -123,6 +123,7 @@ package body Log_Filter_Handlers is
       
       First_Iter : Gtk_Text_Iter;
       Last_Iter  : Gtk_Text_Iter;
+      Error      : Unbounded_String;
       
    begin
       Spinner.Start; 
@@ -132,15 +133,15 @@ package body Log_Filter_Handlers is
                                      The_End => Last_Iter);
       
       Log_Filter.Select_File       (To_String (Retour) );
-      Log_Filter.Set_Filters       (Get_Text  (Filters_Entry) );
+      Log_Filter.Set_Filters       (Get_Text (Filters_Entry) );
       
-      Application_Output.Set_Text          (Text    => Status_Message);
-      Application_Output.Insert_At_Cursor  (Text =>  Log_Filter.Get_Lines);
+      Application_Output.Set_Text          (Text  => Status_Message);
+      Application_Output.Insert_At_Cursor  (Text  => Log_Filter.Get_Lines);
       
       Log_Filter.Reset_Lines;
       Log_Filter.Reset_Lines_Count;
       Spinner.Stop;
-      
+
    end Button_Start_Clicked;
    
 ----------------------------------------------------------             
@@ -150,11 +151,13 @@ package body Log_Filter_Handlers is
    begin
 
       Log_Filter.Close_File;
+      
       Retour := To_Unbounded_String
         (File_Selection_Dialog (Title       => "Select your file",
                                 Default_Dir => "",
                                 Dir_Only    => False,
                                 Must_Exist  => True) );
+      
       File_Label.Set_Text (To_String (Retour) );
       
    end Button_Select_File_Clicked;
@@ -224,7 +227,6 @@ package body Log_Filter_Handlers is
       
       About_Dialog.Hide;
       About_Dialog.Close;
-      
       
    end Quit_About;
    

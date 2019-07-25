@@ -59,20 +59,20 @@ package body Log_Filter is
 
 ----------------------------------------------------------   
 
-   procedure Display_Line is
+   procedure Update_Lines is
    begin
       
-      Lines       := Lines & line & ASCII.LF;
+      Lines       := Lines & line ;
       Lines_Count := Lines_Count + 1;
       
-   end display_line;
+   end Update_Lines;
 
 ----------------------------------------------------------      
 
-   procedure Filter_Check (p_filters           :        store_Filter;
-                           p_number_of_filters :        Natural;
-                           p_word              :        String;
-                           p_Filters_State     : in out store_Filters_State) is
+   procedure Filter_Check (P_Filters           :        store_Filter;
+                           P_Number_Of_Filters :        Natural;
+                           P_Word              :        String;
+                           P_Filters_State     : in out store_Filters_State) is
 
       are_characters_identical : Boolean := true;
       
@@ -133,7 +133,8 @@ package body Log_Filter is
    begin
       While not End_Of_File(file) Loop
          
-         line := To_Unbounded_String (Get_Line(file) );
+         Line := To_Unbounded_String (Get_Line(file) );
+         Line := Line & " ";
          
          Initialize_Filters_State (P_Value         => false,
                                    p_Filters_State => Filters_State);
@@ -144,7 +145,7 @@ package body Log_Filter is
          
          if are_they_all_true (Filters_State) = true then
             
-            Display_line;
+            Update_Lines;
             
          end if;
          
@@ -161,7 +162,7 @@ package body Log_Filter is
                         P_Filters_State     : in out Store_Filters_State) is
    
       Word_Length : Natural := 0;
-      Word        : string (1 .. 40); 
+      Word        : string (1 .. 100); 
    
    begin
       
@@ -208,10 +209,13 @@ package body Log_Filter is
    procedure Select_File (p_file : String) is
    begin
       
-      Open (File => File,
+      if Is_Open (File) = False then
+      
+         Open (File => File,
             Mode => In_File,
             Name => p_file);
       
+      end if;
       
    exception 
       when Ada.Text_IO.Name_Error =>
@@ -239,8 +243,8 @@ package body Log_Filter is
 
    procedure Set_Filters (P_Filters : String) is 
       
-      Last_Inputs_Position        : Natural;
-      Number_Of_Filters : Natural := 1;
+      Last_Inputs_Position : Natural;
+      Number_Of_Filters    : Natural := 1;
       
    begin
       
@@ -330,6 +334,7 @@ package body Log_Filter is
       return Name (File);
       
    end Get_File_Name;
+   
 ----------------------------------------------------------
    
    function Get_Lines_Count
@@ -342,3 +347,8 @@ package body Log_Filter is
    end Get_Lines_Count;
       
 end Log_Filter;
+
+
+
+
+

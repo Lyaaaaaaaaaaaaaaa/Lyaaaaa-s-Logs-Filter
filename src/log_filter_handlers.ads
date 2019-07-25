@@ -1,7 +1,3 @@
-with Gtk.Main;
-with Gtk.Image;
-with Gtkada.Builder;
-
 with Gtk;                     use Gtk;
 with Glib;                    use Glib;
 with Gtk.Box;                 use Gtk.Box;
@@ -11,8 +7,8 @@ with Gtk.Button;              use Gtk.Button;
 with Gtk.Widget;              use Gtk.Widget;
 with Glib.Error;              use Glib.Error;
 with Gtk.Window;              use Gtk.Window;
-with Gtk.Spinner;             use Gtk.Spinner;
 with gtk.Dialog;              use gtk.Dialog;
+with Gtk.Spinner;             use Gtk.Spinner;
 with Gtk.Text_Iter;           use Gtk.Text_Iter;
 with Gtk.Text_View;           use Gtk.Text_View;
 with Gtk.Assistant;           use Gtk.Assistant;
@@ -24,13 +20,10 @@ with Gtk.Entry_Buffer;        use Gtk.Entry_Buffer;
 with Gtk.About_Dialog;        use Gtk.About_Dialog;
 with Gtkada.File_Selection;   use Gtkada.File_Selection;
 
---With Gtk.File_Chooser;        use Gtk.File_Chooser;
---with Gtk.File_Chooser_Button; use Gtk.File_Chooser_Button;
---with Gtk.File_Chooser_Dialog; use Gtk.File_Chooser_Dialog;
-
 
 with Ada.Text_IO;
 with Ada.Strings.Unbounded;   use Ada.Strings.Unbounded;
+
 -- Don't forget to delete the useless inclusions.
 -- Custom include
 
@@ -55,11 +48,9 @@ package Log_Filter_Handlers is
    About_Dialog         :         Gtk_About_Dialog;
    Spinner              :         Gtk_Spinner;
    File_Label           :         Gtk_Label;
---   File_Chooser_Button  :         Gtk_File_Chooser_Button;
---   File_Chooser_Dialog  :         Gtk_File_Chooser_Dialog;
 
    procedure Init;
-    -- Init will Initialize GTKAda and create the objetcs.
+    -- Inits will Initialize GTKAda and create the objetcs.
 
    procedure Connect_Interface;
     -- Will load the interface xml file
@@ -73,7 +64,7 @@ package Log_Filter_Handlers is
 --   -- Set up the parameters of the objects.
 
    procedure Start_Interface;
-    -- Display the main window and start gtk's loop.
+    -- Displays the main window and start gtk's loop.
 
    procedure Quit
      (Self              : access Gtk_Widget_Record'Class);

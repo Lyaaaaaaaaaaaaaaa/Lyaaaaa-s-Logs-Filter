@@ -5,7 +5,9 @@ with Ada.Characters.Handling; use Ada.Characters.Handling;
 
 package Log_Filter is
 
-   -- ===== Variables declaration ====================
+   -------------------------------------------
+   --               Variables               --
+   -------------------------------------------
    
    File        : File_Type;
    Line        : Unbounded_String;
@@ -18,58 +20,88 @@ package Log_Filter is
    type Store_Filters_State is
      array (Natural range <>)                   of Boolean;
    
+   --------------------------------------------
+   --       Procedures and functions         --
+   --------------------------------------------
    
-   -- ===== functions and procedures declaration =====
+   
+   -------------------
+   --    Filters    --
+   -------------------
    
    procedure Create_Filters 
      (P_Number_Of_Filters    :        Natural;
       P_User_Filters_Input   :        String;
       P_Last_Inputs_Position :        Natural);
-   
-   procedure Display_Line;
+    -- Inserts into 2D table "Store_Filter" input words in lower case.
+     -- Calls Read_File
    
    procedure Filter_Check 
      (P_Filters              :        store_Filter;
       P_Number_Of_Filters    :        Natural;
       P_Word                 :        String;
       P_Filters_State        : in out store_Filters_State);
+    -- Compares each filter with the words in current line. 
    
    procedure Initialize_Filters_State 
      (P_Value                :        Boolean;
-      P_Filters_State        : in out Store_Filters_State);
+      P_Filters_State        : in out Store_Filters_State);  
    
-   procedure Read_File 
-     (P_Filters              :        Store_Filter;
-      P_Number_Of_Filters    :        Natural);
+   procedure Set_Filters 
+     (P_Filters              :        String);
+    -- Counts the received filters and calls Create_Filters
+   
+   -----------------
+   --    Lines    --
+   -----------------   
+   
+   procedure Update_Lines;
+    -- Updates Lines and Lines_Count.
    
    procedure Read_Line 
      (P_Filters              :        Store_Filter;
       P_Number_Of_Filters    :        Natural;
       P_Filters_State        : in out Store_Filters_State);
+    -- Reads Line character by character and inserts them into strings "Word"
+     -- Then, calls Filter_Check.    
+   
+   procedure Reset_Lines;
+   
+   procedure Reset_Lines_Count;
+   
+   function Get_Lines
+     return String;
+   
+   function Get_Lines_Count
+     return Integer; 
+
+   
+   ----------------
+   --    File    --
+   ----------------   
+   
+   procedure Read_File 
+     (P_Filters              :        Store_Filter;
+      P_Number_Of_Filters    :        Natural);
+    -- Inserts into Line the current line from the selected file.
+     -- Calls Initialize_Filters_State and Read_Line,
+     -- then checks Filter_State and calls Update_Lines.
    
    procedure Select_File 
      (P_File                 :        String);
    
    procedure Close_File;
    
-   procedure Set_Filters 
-     (P_Filters              :        String);
-   
-   procedure Reset_Lines;
-   
-   procedure Reset_Lines_Count;
+   function Get_File_Name
+     return String;
+ 
+   -----------------
+   --    Other    --
+   -----------------    
    
    function Are_They_All_True 
      (P_Filters_State        :        Store_Filters_State)
-     return Boolean; 
-   
-   function Get_Lines
-     return String;
-   
-   function Get_File_Name
-     return String;
-   
-   function Get_Lines_Count
-     return Integer;
+     return Boolean;     
+
    
 end Log_Filter;
