@@ -90,7 +90,9 @@ Click on the "Select file" button.
 
 Now browse through your files until you found the file you want to filter.
 
-Once done you can click on "Next".</property>
+Once done you can click on "Next".
+Beware, the file can be anything but has to be encoded in UTF-8! 
+You can check the wiki for more information [URL PLACEHOLDER].</property>
       </object>
       <packing>
         <property name="page_type">intro</property>
@@ -104,7 +106,7 @@ Once done you can click on "Next".</property>
         <property name="label" translatable="yes">Now, insert the words you are looking for in the text area after "Filters:"
 
 You can insert multiple words like this:
-"Arthur gold take" You have to insert  whitespace between two words. 
+"Arthur gold take" You have to insert whitespace between two words. 
 The software isn't case sensitive. Therefore, no need to worry about uppercase.
 
 The software will only display the lines where all your words appear.
@@ -136,7 +138,7 @@ Open your file with a text editor and understand its syntax, then try again this
 
 That's all! You can close this window.
 
-For more information check the wiki on GitHub!</property>
+For more information check the wiki on GitHub (see the about menu)!</property>
       </object>
       <packing>
         <property name="page_type">confirm</property>
@@ -295,6 +297,7 @@ For more information check the wiki on GitHub!</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Click here to select your file</property>
+                        <accelerator key="f" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -313,6 +316,7 @@ For more information check the wiki on GitHub!</property>
                         <property name="margin_left">274</property>
                         <property name="image">Image_Button_Start</property>
                         <property name="always_show_image">True</property>
+                        <accelerator key="Return" signal="clicked"/>
                       </object>
                       <packing>
                         <property name="expand">True</property>
