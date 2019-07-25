@@ -21,3 +21,5 @@ In addition, in gaming communities, it's important for servers staff to monitor 
 [How to contribute](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Log-Filters/blob/master/CONTRIBUTING.md)
 
 [Contributors](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/blob/master/CONTRIBUTORS.md)
+
+[Code documentation](https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter/blob/master/gnatdoc/index.html)
