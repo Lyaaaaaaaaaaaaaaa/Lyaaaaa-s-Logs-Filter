@@ -113,7 +113,7 @@ package body Log_Filter_Handlers is
 
       Help_Assistant.Hide;
       Help_Assistant.Close;
-      
+
    end Quit_Assistant;
      
 ----------------------------------------------------------            
@@ -169,31 +169,25 @@ package body Log_Filter_Handlers is
    begin
       
       Help_Assistant.Show_All;
-      
-      for I in 0 .. Help_Assistant.Get_N_Pages loop
+      Validate_Steps;
+     
+   end Display_Help_Assistant;
+   
+----------------------------------------------------------   
+   
+   procedure Validate_Steps is
+   begin
+   
+      for I in 0 .. Help_Assistant.Get_N_Pages - 1 loop
          
       
          Help_Assistant.Set_Page_Complete
            (Page     => Help_Assistant.Get_Nth_Page(I),
             Complete => True);
           -- auto complete steps.
-    
+          
       end loop;
-   end Display_Help_Assistant;
-   
-----------------------------------------------------------   
-   
-   procedure Validate_Step
-     (Self              : access Gtk_Entry_Buffer_Record'Class) is
-   begin
-   
-         
-      Help_Assistant.Set_Page_Complete 
-        (Page     => Help_Assistant.Get_Nth_Page
-         (Help_Assistant.Get_Current_Page),
-         Complete => True);
-         
-   end Validate_Step;
+   end Validate_Steps;
    
 ----------------------------------------------------------             
    
@@ -203,7 +197,7 @@ package body Log_Filter_Handlers is
       
       if Help_Assistant.Get_Current_Page < Help_Assistant.Get_N_Pages then
          
-         Help_Assistant.Next_Page;
+         Help_Assistant.Next_Page;         
          
       end if;
       
@@ -214,8 +208,8 @@ package body Log_Filter_Handlers is
    procedure Display_About
      (self              : access Gtk_Menu_Item_Record'Class) is
    begin
-   
-     About_Dialog.Show_All;
+      
+      About_Dialog.Show_All;
       
    end Display_About;
 
@@ -227,6 +221,7 @@ package body Log_Filter_Handlers is
       
       About_Dialog.Hide;
       About_Dialog.Close;
+      Ada.Text_IO.Put_Line("Quit_About");
       
    end Quit_About;
    

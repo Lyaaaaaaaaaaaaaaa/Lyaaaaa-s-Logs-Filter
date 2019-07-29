@@ -95,9 +95,8 @@ package Log_Filter_Handlers is
      (Self              : access Gtk_Assistant_Record'Class);
     -- Will show the next page of the assistant.
 
-   procedure Validate_Step
-     (Self              : access Gtk_Entry_Buffer_Record'Class);
-    -- will validate the step and unlock the "next" button.
+   procedure Validate_Steps;
+    -- will validate the steps and unlock the "next" buttons.
 
    procedure Quit_Assistant
      (self              : access Gtk_Assistant_Record'Class);
