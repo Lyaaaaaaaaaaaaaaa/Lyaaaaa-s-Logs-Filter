@@ -8,7 +8,7 @@ It is more efficient and more readable for sizeable files. Ctrl+f is limited whe
 In addition, in gaming communities, it's important for servers staff to monitor the logs. However, everyone has not knowledge in Linux/Windows terminal. The software comes with a simple interface usable by anyone.
 
 ## Project roadmap:
-1. Creating the package to read a file, filter it, and return each 'correct' line. *Working*
+1. Creating the package to read a file, filter it, and return each 'correct' line. *Done*
 2. Create an interface.  *Done*
 3. Connect the interface to the previous package. *WIP*
 
