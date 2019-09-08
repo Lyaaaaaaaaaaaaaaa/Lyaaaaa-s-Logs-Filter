@@ -62,7 +62,7 @@ package body Log_Filter is
    procedure Update_Lines is
    begin
       
-      Lines       := Lines & line ;
+      Lines       := Lines & line & ASCII.LF;
       Lines_Count := Lines_Count + 1;
       
    end Update_Lines;

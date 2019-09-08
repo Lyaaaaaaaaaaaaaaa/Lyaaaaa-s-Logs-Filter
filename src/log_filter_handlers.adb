@@ -16,7 +16,7 @@ package body Log_Filter_Handlers is
        
       Return_Code := Add_From_File 
         (Builder  => Builder,
-         Filename => "Interface.glade",
+         Filename => "Interface_Windows.glade",
          Error    => Error'Access);  
       
       if Error /= null then
@@ -67,11 +67,11 @@ package body Log_Filter_Handlers is
 
       Button_Start.On_Clicked        (Button_Start_Clicked'Access);
       Main_Window.On_Destroy         (Quit'Access);
-      Help_Menu_Item.On_Activate     (Display_Help_Assistant'Access);
+      --Help_Menu_Item.On_Activate     (Display_Help_Assistant'Access);
       Help_Assistant.On_Cancel       (Quit_Assistant'Access);
       Help_Assistant.On_Apply        (Display_Next_Page'Access);
       Help_Assistant.On_Close        (Quit_Assistant'Access);
-      About_Menu_Item.On_Activate    (Display_About'Access);
+      --About_Menu_Item.On_Activate    (Display_About'Access);
       About_Dialog.On_Close          (Quit_About'Access);
       Button_Select_File.On_Clicked  (Button_Select_File_Clicked'Access);
       
@@ -235,13 +235,13 @@ package body Log_Filter_Handlers is
    begin
       
       Message := 
-        To_Unbounded_String ("---------------------------------------------")
+        To_Unbounded_String ("----------------------------------------------------")
         & ASCII.LF
-        & "                                 "
+        & "                 "
         & To_Unbounded_String (Integer'Image (Log_Filter.Get_Lines_Count) )
         & To_Unbounded_String (" Valid lines found")
         & ASCII.LF
-        & "---------------------------------------------"
+        & "----------------------------------------------------"
         & ASCII.LF;
               
       
