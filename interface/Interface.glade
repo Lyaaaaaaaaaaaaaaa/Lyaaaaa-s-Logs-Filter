@@ -27,7 +27,7 @@ Author: Lyaaaaaaaaaaaaaaa
 
 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk+" version="3.14"/>
   <!-- interface-license-type mit -->
   <!-- interface-name Lyaaaaa's Logs Filter -->
   <!-- interface-authors Lyaaaaaaaaaaaaaaa -->
@@ -40,7 +40,7 @@ Author: Lyaaaaaaaaaaaaaaa
     <property name="website">https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter</property>
     <property name="website_label" translatable="yes">My GitHub</property>
     <property name="authors">Lyaaaaaaaaaaaaaaa</property>
-    <property name="logo">../../../../../../../../../home/luis/Images/44974422.jpg</property>
+    <property name="logo">../../../../home/luis/Images/44974422.jpg</property>
     <property name="license_type">mit-x11</property>
     <child type="titlebar">
       <placeholder/>
@@ -92,7 +92,7 @@ Now browse through your files until you found the file you want to filter.
 
 Once done you can click on "Next".
 Beware, the file can be anything but has to be encoded in UTF-8! 
-You can check the wiki for more information [URL PLACEHOLDER].</property>
+You can check the wiki for more information</property>
       </object>
       <packing>
         <property name="page_type">intro</property>
@@ -177,46 +177,7 @@ For more information check the wiki on GitHub (see the about menu)!</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkMenuBar">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkMenuItem" id="Menu_Item_About">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">About</property>
-                <property name="use_underline">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="Menu_Item_Help">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Help</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="Help_Menu">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem">
-                        <property name="label">gtk-help</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
+          <placeholder/>
         </child>
         <child>
           <object class="GtkBox">
@@ -357,7 +318,7 @@ For more information check the wiki on GitHub (see the about menu)!</property>
                         <property name="height_request">-1</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">The filtered lines will appear here</property>
+                        <property name="tooltip_text" translatable="yes">The filtered lines will appear here. Don't forget to use utf-8 encoded files!</property>
                         <property name="pixels_below_lines">6</property>
                         <property name="pixels_inside_wrap">1</property>
                         <property name="editable">False</property>
