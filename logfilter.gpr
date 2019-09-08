@@ -1,5 +1,17 @@
+with "C:\GNAT\GTK\lib\gnat\gtkada";
+
 project Logfilter is
     for Source_Dirs use ("src");
-    for Object_Dir use "obj";
+    for Object_Dir  use "obj";
+    for Exec_Dir    use "exec";
     for Main use ("log_filter_main.adb");
+
+    package Builder is
+      for Executable ("main.adb") use "Logs_Filter";
+    end Builder;
+
+    package Compiler is
+      for Switches ("ada") use ("-Wl,--subsystem,windows");
+    end Compiler;
+
 end Logfilter;
