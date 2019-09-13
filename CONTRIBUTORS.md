@@ -2,4 +2,6 @@
 
 ## Thank you!
 
-* [Marquess](https://github.com/Marquess18)
+* ElkaNewMx
+* David
+* Buchanan
