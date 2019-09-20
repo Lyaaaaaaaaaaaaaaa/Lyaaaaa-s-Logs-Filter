@@ -35,12 +35,12 @@ Author: Lyaaaaaaaaaaaaaaa
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
     <property name="program_name">Lyaaaaa's Logs Filter</property>
-    <property name="version">x.x</property>
+    <property name="version">1.0</property>
     <property name="copyright" translatable="yes">Copyright (c) 2019</property>
     <property name="website">https://github.com/Lyaaaaaaaaaaaaaaa/Lyaaaaa-s-Logs-Filter</property>
     <property name="website_label" translatable="yes">My GitHub</property>
     <property name="authors">Lyaaaaaaaaaaaaaaa</property>
-    <property name="logo">../../../../../../../../../home/luis/Images/44974422.jpg</property>
+    <property name="logo">44974422.jpg</property>
     <property name="license_type">mit-x11</property>
     <child type="titlebar">
       <placeholder/>
@@ -92,7 +92,7 @@ Now browse through your files until you found the file you want to filter.
 
 Once done you can click on "Next".
 Beware, the file can be anything but has to be encoded in UTF-8! 
-You can check the wiki for more information [URL PLACEHOLDER].</property>
+You can check the wiki for more information</property>
       </object>
       <packing>
         <property name="page_type">intro</property>
@@ -157,6 +157,12 @@ For more information check the wiki on GitHub (see the about menu)!</property>
     <child>
       <placeholder/>
     </child>
+  </object>
+  <object class="GtkImage" id="Image_Button_Select_File">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_right">4</property>
+    <property name="stock">gtk-open</property>
   </object>
   <object class="GtkImage" id="Image_Button_Start">
     <property name="visible">True</property>
@@ -297,6 +303,8 @@ For more information check the wiki on GitHub (see the about menu)!</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Click here to select your file</property>
+                        <property name="image">Image_Button_Select_File</property>
+                        <property name="always_show_image">True</property>
                         <accelerator key="f" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                       <packing>
