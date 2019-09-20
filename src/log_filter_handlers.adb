@@ -1,12 +1,45 @@
+----------------------------------------------------------
+-- Copyright (c), The MIT License (MIT)
+-- Author: Lyaaaaaaaaaaaaaaa
+--
+-- Revision History:
+--   18/09/2019 Lyaaaaaaaaaaaaaaa
+--    - Added file header
+--    - Removed procedure Init_Objects (unused procedure)
+----------------------------------------------------------
+
 package body Log_Filter_Handlers is
+   
+----------------------------------------------------------
 
+   -------------------------------------------
+   --               Variables               --
+   -------------------------------------------  
+   
+   Error                : aliased Glib.Error.GError;
+   Button_Start         :         Gtk_Button;
+   Builder              :         Gtkada_Builder;
+   Return_Code          :         Guint;
+   Main_Window          :         Gtk_Window;
+   Filters_Entry        :         Gtk_Entry_Buffer;
+   Application_Output   :         Gtk_Text_Buffer;
+   Button_Select_File   :         Gtk_Button;
+   Retour               :         Unbounded_String;
+   Help_Assistant       :         Gtk_Assistant;
+   Help_Menu_Item       :         Gtk_Menu_Item;
+   About_Menu_Item      :         Gtk_Menu_Item;
+   About_Dialog         :         Gtk_About_Dialog;
+   Spinner              :         Gtk_Spinner;
+   File_Label           :         Gtk_Label;
 
+ ----------------------------------------------------------   
+   
    procedure Init is
    begin
    
        Gtk.Main.init;
        Gtk_New (Builder);
-
+      
    end Init;
 
 ----------------------------------------------------------
@@ -77,13 +110,6 @@ package body Log_Filter_Handlers is
       
 
    end Register_Handlers;
-----------------------------------------------------------
-
---   procedure Init_Objects is
---   begin
-
-      
---   end Init_Objects;
    
 ----------------------------------------------------------
    

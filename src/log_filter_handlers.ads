@@ -1,3 +1,18 @@
+----------------------------------------------------------
+-- Copyright (c), The MIT License (MIT)
+-- Author: Lyaaaaaaaaaaaaaaa
+--
+-- Revision History:
+--   18/09/2019 Lyaaaaaaaaaaaaaaa
+--    - Added file header
+--    - Removed procedure Init_Objects (unused procedure)
+----------------------------------------------------------
+
+   ----------------------
+   --   Gtk includes   --
+   ----------------------
+
+with GtkAda;
 with Gtk;                     use Gtk;
 with Glib;                    use Glib;
 with Gtk.Box;                 use Gtk.Box;
@@ -20,34 +35,34 @@ with Gtk.Entry_Buffer;        use Gtk.Entry_Buffer;
 with Gtk.About_Dialog;        use Gtk.About_Dialog;
 with Gtkada.File_Selection;   use Gtkada.File_Selection;
 
+----------------------------------------------------------
+
+   ----------------------
+   --   Ada includes   --
+   ----------------------
 
 with Ada.Text_IO;
 with Ada.Strings.Unbounded;   use Ada.Strings.Unbounded;
 
--- Don't forget to delete the useless inclusions.
--- Custom include
+----------------------------------------------------------
+
+   -------------------------
+   --   Custom includes   --
+   -------------------------
 
 with Log_Filter;              use Log_Filter;
+
+----------------------------------------------------------
 
 package Log_Filter_Handlers is
    -- Init GtkAda, connect the interface file with the package
    -- Connect the signals with the handlers.
 
-   Error                : aliased Glib.Error.GError;
-   Button_Start         :         Gtk_Button;
-   Builder              :         Gtkada_Builder;
-   Return_Code          :         Guint;
-   Main_Window          :         Gtk_Window;
-   Filters_Entry        :         Gtk_Entry_Buffer;
-   Application_Output   :         Gtk_Text_Buffer;
-   Button_Select_File   :         Gtk_Button;
-   Retour               :         Unbounded_String;
-   Help_Assistant       :         Gtk_Assistant;
-   Help_Menu_Item       :         Gtk_Menu_Item;
-   About_Menu_Item      :         Gtk_Menu_Item;
-   About_Dialog         :         Gtk_About_Dialog;
-   Spinner              :         Gtk_Spinner;
-   File_Label           :         Gtk_Label;
+----------------------------------------------------------
+
+   --------------------------------------------
+   --       Procedures and functions         --
+   --------------------------------------------
 
    procedure Init;
     -- Inits will Initialize GTKAda and create the objetcs.
@@ -60,16 +75,12 @@ package Log_Filter_Handlers is
    procedure Register_Handlers;
     -- Links Gtk's signals with the Log_Filter_Handlers.
 
---   procedure Init_Objects;
---   -- Set up the parameters of the objects.
-
    procedure Start_Interface;
     -- Displays the main window and start gtk's loop.
 
    procedure Quit
      (Self              : access Gtk_Widget_Record'Class);
     -- Unreference the builder and shutdown the application.
-
 
    -----------------
    --   Buttons   --
@@ -81,7 +92,8 @@ package Log_Filter_Handlers is
 
    procedure Button_Select_File_Clicked
      (Self              : access Gtk_Button_Record'Class);
-    -- WIP
+    -- The "Select file" button handler.
+      -- Close opened file, open file chooser dialog, display file's path
 
    -------------------
    --   Assistant   --
@@ -96,7 +108,7 @@ package Log_Filter_Handlers is
     -- Will show the next page of the assistant.
 
    procedure Validate_Steps;
-    -- will validate the steps and unlock the "next" buttons.
+    -- will validate the steps (assistant dialog) and unlock the "next" buttons.
 
    procedure Quit_Assistant
      (self              : access Gtk_Assistant_Record'Class);
@@ -121,7 +133,6 @@ package Log_Filter_Handlers is
 
    function Status_Message
      return String;
-   --Will format a text with the number of lines checked, how many valid
-    -- and the filters. WIP
+   -- Formats a text with the number of returned lines.
 
 end Log_Filter_Handlers;
