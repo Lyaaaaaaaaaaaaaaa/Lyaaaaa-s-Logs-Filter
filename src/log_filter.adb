@@ -90,9 +90,9 @@ package body Log_Filter is
 ----------------------------------------------------------      
 
    procedure Check_Filters (P_Filters           :        store_Filter;
-                           P_Number_Of_Filters :        Natural;
-                           P_Word              :        String;
-                           P_Filters_State     : in out store_Filters_State) is
+                            P_Number_Of_Filters :        Natural;
+                            P_Word              :        String;
+                            P_Filters_State     : in out store_Filters_State) is
 
       are_characters_identical : Boolean := true;
       
