@@ -1,6 +1,27 @@
+----------------------------------------------------------
+-- Copyright (c), The MIT License (MIT)
+-- Author: Lyaaaaaaaaaaaaaaa
+--
+-- Revision History:
+--   18/09/2019 Lyaaaaaaaaaaaaaaa
+--    - Added file header
+--    - Filter_Check becomes Check_Filters
+----------------------------------------------------------
+
 package body Log_Filter is
 
 ----------------------------------------------------------   
+
+   -------------------------------------------
+   --               Variables               --
+   -------------------------------------------
+   
+   File        : File_Type;
+   Line        : Unbounded_String;
+   Lines       : Unbounded_String;
+   Lines_Count : Integer;
+   
+ ----------------------------------------------------------   
    
    procedure Create_Filters (P_Number_Of_Filters    : Natural;
                              P_User_Filters_Input   : String;
@@ -12,7 +33,7 @@ package body Log_Filter is
       subtype array_line_control is
         Natural range 1 .. 40;   
       
-      filters          : store_filter (1 .. 40, 1..p_number_of_filters);
+      Filters          : store_filter (1 .. 40, 1..p_number_of_filters);
       Columns_Position : array_column_control := 1; 
       Lines_Position   : array_line_control   := 1; 
       
@@ -21,18 +42,17 @@ package body Log_Filter is
       for I in 1 .. P_Last_Inputs_Position loop
          
          if P_User_Filters_Input (I) /= ' ' then
-                        
-            --  We use To_Lower to store filters in lower case in a variable.
-              --  So we won't miss the word carl because the user entered Carl.
             
-            filters (Lines_Position, Columns_Position) :=
+            Filters (Lines_Position, Columns_Position) :=
               To_Lower (P_User_Filters_Input (I)); 
-           
+                --  We use To_Lower to store filters in lower case in a variable.
+                 -- So we won't miss the word carl because the user entered Carl.      
+            
             Lines_Position := Lines_Position + 1;  
             
             if I = P_Last_Inputs_Position then
                
-               filters (Lines_Position, Columns_Position) := '|';
+               Filters (Lines_Position, Columns_Position) := '|';
                
             end if;
             
@@ -40,7 +60,7 @@ package body Log_Filter is
             
             if P_User_Filters_Input (I-1) /= ' ' then
            
-               filters (Lines_Position, Columns_Position) := '|';
+               Filters (Lines_Position, Columns_Position) := '|';
                Lines_Position                             := 1;
             
                if Columns_Position < p_number_of_filters then
@@ -53,7 +73,7 @@ package body Log_Filter is
                   
       end loop;
       
-      Read_File (filters, p_number_of_filters);
+      Read_File (Filters, p_number_of_filters);
             
    end create_filters;
 
@@ -69,10 +89,10 @@ package body Log_Filter is
 
 ----------------------------------------------------------      
 
-   procedure Filter_Check (P_Filters           :        store_Filter;
-                           P_Number_Of_Filters :        Natural;
-                           P_Word              :        String;
-                           P_Filters_State     : in out store_Filters_State) is
+   procedure Check_Filters (P_Filters           :        store_Filter;
+                            P_Number_Of_Filters :        Natural;
+                            P_Word              :        String;
+                            P_Filters_State     : in out store_Filters_State) is
 
       are_characters_identical : Boolean := true;
       
@@ -105,7 +125,7 @@ package body Log_Filter is
          
       end loop;
       
-   end Filter_Check;   
+   end Check_Filters;   
  
 ----------------------------------------------------------         
 
@@ -192,7 +212,7 @@ package body Log_Filter is
                   
          elsif Element (line,I) = ' ' or End_Of_Line (file) = true then
                
-            Filter_Check (P_filters           => P_filters,
+            Check_Filters (P_filters           => P_filters,
                           P_number_of_filters => P_number_of_filters,
                           P_word              => word,
                           P_Filters_State     => P_Filters_State);

@@ -1,24 +1,40 @@
+----------------------------------------------------------
+-- Copyright (c), The MIT License (MIT)
+-- Author: Lyaaaaaaaaaaaaaaa
+--
+-- Revision History:
+--   18/09/2019 Lyaaaaaaaaaaaaaaa
+--    - Added file header
+--    - Filter_Check becomes Check_Filters
+--
+-- Encoding issues :
+--  - Needs UTF-8 encoded files,
+--     otherwise it will return wrong data.
+--
+-- Limitations :
+--  - Filters can't be longer than 40 characters.
+--     See array_line_control 's range in Create_Filters.
+--     See Filters in Create_Filters and its subtype. 
+----------------------------------------------------------
+
 with Text_IO;                 use Text_IO;
 with Ada.Strings.Unbounded;   use Ada.Strings.Unbounded;
 with Text_IO.Unbounded_IO;
 with Ada.Characters.Handling; use Ada.Characters.Handling;
 
+----------------------------------------------------------
+
 package Log_Filter is
 
-   -------------------------------------------
-   --               Variables               --
-   -------------------------------------------
-   
-   File        : File_Type;
-   Line        : Unbounded_String;
-   Lines       : Unbounded_String;
-   Lines_Count : Integer;
+ ----------------------------------------------------------  
    
    type Store_Filter is
      array (Natural range <>, Natural range <>) of Character;
    
    type Store_Filters_State is
      array (Natural range <>)                   of Boolean;
+  
+ ----------------------------------------------------------  
    
    --------------------------------------------
    --       Procedures and functions         --
@@ -36,7 +52,7 @@ package Log_Filter is
     -- Inserts into 2D table "Store_Filter" input words in lower case.
      -- Calls Read_File
    
-   procedure Filter_Check 
+   procedure Check_Filters 
      (P_Filters              :        store_Filter;
       P_Number_Of_Filters    :        Natural;
       P_Word                 :        String;
@@ -63,7 +79,7 @@ package Log_Filter is
       P_Number_Of_Filters    :        Natural;
       P_Filters_State        : in out Store_Filters_State);
     -- Reads Line character by character and inserts them into strings "Word"
-     -- Then, calls Filter_Check.    
+     -- Then, calls Check_Filters.    
    
    procedure Reset_Lines;
    

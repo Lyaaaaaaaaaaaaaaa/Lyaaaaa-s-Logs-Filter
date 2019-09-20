@@ -1,4 +1,11 @@
---Custom include
+----------------------------------------------------------
+-- Copyright (c), The MIT License (MIT)
+-- Author: Lyaaaaaaaaaaaaaaa
+--
+-- Revision History:
+--   18/09/2019 Lyaaaaaaaaaaaaaaa
+--    - Added file header
+----------------------------------------------------------
 
 with Log_Filter_Handlers;
 
