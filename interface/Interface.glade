@@ -366,8 +366,6 @@ For more information check the wiki on GitHub (see the about menu)!</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="tooltip_text" translatable="yes">The filtered lines will appear here</property>
-                        <property name="pixels_below_lines">6</property>
-                        <property name="pixels_inside_wrap">1</property>
                         <property name="editable">False</property>
                         <property name="wrap_mode">word</property>
                         <property name="buffer">Text_View_Output_Buffer</property>
