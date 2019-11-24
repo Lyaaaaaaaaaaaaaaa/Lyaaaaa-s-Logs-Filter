@@ -6,6 +6,11 @@
 --   18/09/2019 Lyaaaaaaaaaaaaaaa
 --    - Added file header
 --    - Filter_Check becomes Check_Filters
+--   17/10/2019 Lyaaaaaaaaaaaaaaa
+--    - Word (declared in Read_Line) now can be of 1000 characters
+--       instead of 100
+--    - Added  "& ASCII.LF" to Lines in Update_Lines
+--       in other words, added an end of line. 
 ----------------------------------------------------------
 
 package body Log_Filter is
@@ -82,7 +87,7 @@ package body Log_Filter is
    procedure Update_Lines is
    begin
       
-      Lines       := Lines & line ;
+      Lines       := Lines & line & ASCII.LF;
       Lines_Count := Lines_Count + 1;
       
    end Update_Lines;
@@ -182,7 +187,7 @@ package body Log_Filter is
                         P_Filters_State     : in out Store_Filters_State) is
    
       Word_Length : Natural := 0;
-      Word        : string (1 .. 100); 
+      Word        : string (1 .. 1000); 
    
    begin
       
