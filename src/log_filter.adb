@@ -6,6 +6,9 @@
 --   18/09/2019 Lyaaaaaaaaaaaaaaa
 --    - Added file header
 --    - Filter_Check becomes Check_Filters
+--   17/10/2019 Lyaaaaaaaaaaaaaaa
+--    - Word (declared in Read_Line) now can be of 1000 characters
+--       instead of 100.
 ----------------------------------------------------------
 
 package body Log_Filter is
@@ -182,7 +185,7 @@ package body Log_Filter is
                         P_Filters_State     : in out Store_Filters_State) is
    
       Word_Length : Natural := 0;
-      Word        : string (1 .. 100); 
+      Word        : string (1 .. 1000); 
    
    begin
       
