@@ -1,4 +1,8 @@
-# Lyaaaaa-s-Log-Filters
+# Lyaaaaa-s-Log-Filters [No longer maintained]
+
+## No longer maintained?
+Yes, the software is now obselete and you should take a look at [its successor](https://github.com/Lyaaaaaaaaaaaaaaa/Logs_Filter_2)
+if you are interested in a log filtering software.
 
 ## What does this project do?
 This project is a lightweight user-friendly software which filters logs. You give him a log file and filters and it displays for you the lines in which filters appear.
